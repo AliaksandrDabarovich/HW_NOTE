@@ -1,5 +1,9 @@
+package com.epam.jbp2;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Notebook {
     private List<Note> noteList;
@@ -24,12 +28,38 @@ public class Notebook {
         noteList.add(note);
     }
 
+    public void addNote(String noteText) {
+        noteList.add(new Note(noteText));
+    }
+
     public Note getNote(int index) {
         return noteList.get(index);
     }
 
     public void deleteNote(Note note) {
         noteList.remove(note);
+    }
+
+    public Note findNoteByText(String searchText) {
+        if (!searchText.isEmpty()) {
+            for (Note note : noteList) {
+                if (note.getNote().equals(searchText)) {
+                    return note;
+                }
+            }
+        }
+        throw new NoSuchElementException("Unable to locate note with text: " + searchText);
+    }
+
+    public Note findNoteByDate(Date date) {
+        if (date != null) {
+            for (Note note : noteList) {
+                if (note.getDate().equals(date)) {
+                    return note;
+                }
+            }
+        }
+        throw new NoSuchElementException("Unable to locate note with date: " + date);
     }
 
     @Override
@@ -54,7 +84,7 @@ public class Notebook {
 
     @Override
     public String toString() {
-        return "Notebook{" +
+        return "com.epam.jbp2.Notebook{" +
                 "noteList=" + noteList +
                 '}';
     }

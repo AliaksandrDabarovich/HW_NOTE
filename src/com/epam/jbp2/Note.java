@@ -1,3 +1,5 @@
+package com.epam.jbp2;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -66,7 +68,7 @@ public class Note implements Serializable {
 
     @Override
     public String toString() {
-        return "Note{" +
+        return "com.epam.jbp2.Note{" +
                 "note='" + note + "', date=" + date +
                 '}';
     }
