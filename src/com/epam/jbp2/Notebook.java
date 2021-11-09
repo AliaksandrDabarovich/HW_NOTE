@@ -1,11 +1,12 @@
 package com.epam.jbp2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Notebook {
+public class Notebook implements Serializable {
     private List<Note> noteList;
 
     public Notebook() {
