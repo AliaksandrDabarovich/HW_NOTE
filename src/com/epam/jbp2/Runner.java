@@ -1,22 +1,51 @@
 package com.epam.jbp2;
 
+import com.epam.jbp2.entity.Note;
+import com.epam.jbp2.entity.Notebook;
+import com.epam.jbp2.logic.NoteBookLogic;
+import com.epam.jbp2.repository.NotebookProvider;
+import com.epam.jbp2.view.PrintNoteView;
+
+import java.time.Year;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-        Note note1 = new Note("rrr", new Date(2021, 12, 31));
-        Note note2 = new Note("eee", new Date(2022, 2, 1));
-        List<Note> noteList = Arrays.asList(note1, note2);
+        NoteBookLogic noteBookLogic = new NoteBookLogic();
 
-        NotebookProvider notebookProvider = NotebookProvider.getInstance();
-        int notebookIndex = notebookProvider.createNewNoteBook();
-        Notebook notebook = notebookProvider.getNotebook(notebookIndex);
-        notebook.addNote(note1);
-        notebook.addNote(note2);
+        try {
+            Note note1 = new Note("Bext1", new Date(122, 11, 31));
+            Note note2 = new Note("Aext2", new Date(121, 2, 1));
 
-        System.out.println(notebook.findNoteByText("rrr"));
-        System.out.println(notebook.findNoteByDate(new Date(2022, 2, 1)));
+            //create notebook
+            int index = noteBookLogic.createNoteBook(note1, note2);
+            System.out.println(noteBookLogic.getQuantityOfNoteBooks());
+
+            //update note text
+            noteBookLogic.setNotebook(index);
+            int updatedNoteIndex = 1;
+            noteBookLogic.updateNoteText(updatedNoteIndex, "A new Text1");
+
+            //update note date
+            Date updatedDate = new Date(155, 5, 5);
+            noteBookLogic.updateNoteDate(updatedNoteIndex, updatedDate);
+            PrintNoteView.print(note2);
+
+            //sort notes by name
+            PrintNoteView.print(noteBookLogic.getNotebook(), "Before sorting by name");
+            noteBookLogic.sortNotesByName();
+            PrintNoteView.print(noteBookLogic.getNotebook(), "After sorting by name");
+
+            //sort notes by date
+            PrintNoteView.print(noteBookLogic.getNotebook(), "Before sorting by date");
+            noteBookLogic.sortNotesByDate();
+            PrintNoteView.print(noteBookLogic.getNotebook(), "After sorting by date");
+
+        } catch (Exception e) {
+            System.out.println("sorry (");
+        }
+
     }
 }

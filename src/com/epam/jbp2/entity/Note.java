@@ -1,6 +1,8 @@
-package com.epam.jbp2;
+package com.epam.jbp2.entity;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Note implements Serializable {
@@ -68,8 +70,9 @@ public class Note implements Serializable {
 
     @Override
     public String toString() {
-        return "com.epam.jbp2.Note{" +
-                "note='" + note + "', date=" + date +
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        return "com.epam.jbp2.entity.Note{" +
+                "note='" + note + "', date=" + dateFormat.format(date) +
                 '}';
     }
 }

@@ -1,6 +1,10 @@
-package com.epam.jbp2;
+package com.epam.jbp2.repository;
+
+import com.epam.jbp2.entity.Note;
+import com.epam.jbp2.entity.Notebook;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NotebookProvider {
@@ -25,4 +29,21 @@ public class NotebookProvider {
         noteList.add(notebook);
         return noteList.size() - 1;
     }
+
+    public int createNoteBook(Note... notes) {
+        noteList.add(new Notebook(Arrays.asList(notes)));
+        return noteList.size() - 1;
+
+    }
+
+    public Notebook addNotebook(Notebook notebook) {
+        noteList.add(notebook);
+        return notebook;
+    }
+
+    public int getQuantityOfNoteBooks() {
+        return noteList.size();
+    }
+
+
 }

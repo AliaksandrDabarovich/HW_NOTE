@@ -1,10 +1,8 @@
-package com.epam.jbp2;
+package com.epam.jbp2.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class Notebook implements Serializable {
     private List<Note> noteList;
@@ -41,28 +39,6 @@ public class Notebook implements Serializable {
         noteList.remove(note);
     }
 
-    public Note findNoteByText(String searchText) {
-        if (!searchText.isEmpty()) {
-            for (Note note : noteList) {
-                if (note.getNote().equals(searchText)) {
-                    return note;
-                }
-            }
-        }
-        throw new NoSuchElementException("Unable to locate note with text: " + searchText);
-    }
-
-    public Note findNoteByDate(Date date) {
-        if (date != null) {
-            for (Note note : noteList) {
-                if (note.getDate().equals(date)) {
-                    return note;
-                }
-            }
-        }
-        throw new NoSuchElementException("Unable to locate note with date: " + date);
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -85,7 +61,7 @@ public class Notebook implements Serializable {
 
     @Override
     public String toString() {
-        return "com.epam.jbp2.Notebook{" +
+        return "com.epam.jbp2.entity.Notebook{" +
                 "noteList=" + noteList +
                 '}';
     }
